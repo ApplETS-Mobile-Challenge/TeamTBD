@@ -22,47 +22,85 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom">
-        <TableRow
-            android:gravity="center">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pot : "
-                android:textAlignment="textEnd"
-                android:textSize="30dp"
-                android:id="@+id/pot" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="potValue"
-                android:textAlignment="textStart"
-                android:textSize="30dp"
-                android:id="@+id/potValue" />
-        </TableRow>
-
-        <TableRow
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:gravity="center">
 
-        </TableRow>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="2">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Pot : "
+                    android:textAlignment="textEnd"
+                    android:textSize="30dp"
+                    android:id="@+id/pot"
+                    android:layout_weight="1"/>
 
-        <TableRow
-            android:gravity="center">
-            <TextView
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textAlignment="textStart"
+                    android:textSize="30dp"
+                    android:id="@+id/potValue"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Tickets : "
-                android:textAlignment="textEnd"
-                android:textSize="30dp"
-                android:id="@+id/tickets" />
-            <TextView
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="2">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chance : "
+                    android:textAlignment="textEnd"
+                    android:textSize="30dp"
+                    android:id="@+id/chance"
+                    android:layout_weight="1"  />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAlignment="textStart"
+                    android:textSize="30dp"
+                    android:id="@+id/chanceValue"
+                    android:layout_weight="1"  />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ticketsValue"
-                android:textAlignment="textStart"
-                android:textSize="30dp"
-                android:id="@+id/ticketsValue" />
-        </TableRow>
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="2">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tickets : "
+                    android:textAlignment="textEnd"
+                    android:textSize="30dp"
+                    android:id="@+id/tickets"
+                    android:layout_weight="1"  />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAlignment="textStart"
+                    android:textSize="30dp"
+                    android:id="@+id/ticketsValue"
+                    android:layout_weight="1"  />
+            </LinearLayout>
+        </LinearLayout>
 
         <TableRow
             android:gravity="center">
