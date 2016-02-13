@@ -18,7 +18,7 @@ public class HostActivity extends AppCompatActivity {
     private String eventId;
     private int price;
     private EventBus eventBus = Bus.getInstance();
-    private TextView title, pot;
+    private TextView title, pot, tickets;
     private EventService eventService;
 
     @Override
@@ -28,6 +28,7 @@ public class HostActivity extends AppCompatActivity {
 
         title = (TextView)findViewById(R.id.eventTittle);
         pot = (TextView)findViewById(R.id.potValue);
+        tickets = (TextView)findViewById(R.id.ticketsValue);
 
         eventId = getIntent().getStringExtra("eventId");
 
@@ -48,6 +49,7 @@ public class HostActivity extends AppCompatActivity {
     @Subscribe
     public  void updateTotalTickets(TotalTicketEvent event){
         pot.setText((Integer.parseInt(event.content) * price) + "$");
+        tickets.setText(event.content);
     }
 
     @Override
