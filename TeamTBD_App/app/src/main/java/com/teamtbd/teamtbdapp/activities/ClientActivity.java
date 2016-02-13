@@ -12,6 +12,7 @@ import com.teamtbd.teamtbdapp.events.Bus;
 import com.teamtbd.teamtbdapp.events.TicketEvent;
 import com.teamtbd.teamtbdapp.events.TitleEvent;
 import com.teamtbd.teamtbdapp.events.TotalTicketEvent;
+import com.teamtbd.teamtbdapp.events.UpdateTotalEvent;
 import com.teamtbd.teamtbdapp.services.EventService;
 
 import org.greenrobot.eventbus.EventBus;
@@ -35,7 +36,8 @@ public class ClientActivity extends AppCompatActivity {
         tickets.setText("0");
 
         eventService = new EventService(this);
-        eventService.getName("");//A Changer
+        eventService.getTicketPrice("");
+        eventService.getName("");
         eventService.getOnesTickets("","");
         eventService.getTotalTickets("");
 
@@ -51,6 +53,11 @@ public class ClientActivity extends AppCompatActivity {
             }
         });
     }
+    @Subscribe
+    public void updatePrice(UpdateTotalEvent event){
+        price = Integer.parseInt(event.content);
+    }
+
     @Subscribe
     public void updateTitle(TitleEvent event){
         title.setText(event.content);
