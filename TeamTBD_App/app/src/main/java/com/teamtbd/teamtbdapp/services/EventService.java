@@ -16,7 +16,7 @@ import org.greenrobot.eventbus.EventBus;
 
 
 public class EventService implements IEventService {
-    private final static String API_URL = "http://www.modonoob.net:8081/";
+    private final static String API_URL = "http://teamspeak.sirkhepre.net:3000/";
 
     private Context context;
     private EventBus eventBus = Bus.getInstance();
@@ -46,6 +46,20 @@ public class EventService implements IEventService {
 
     @Override
     public void getTickets(String eventID, String userID, int qty) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/" + eventID + "/tickets/" + userID + "/" + qty +"/", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                eventBus.post(new TestEvent(response));
+                Log.i("_TEAM_TBD_", "getTickets posted.");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("_TEAM_TBD_", error.networkResponse.data.toString());
+            }
+        });
 
+        queue.add(stringRequest);
     }
 }

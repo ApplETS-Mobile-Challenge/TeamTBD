@@ -11,31 +11,27 @@
     tools:context=".activities.HomeActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/testTextView"
-        android:text="No response received yet."
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textAlignment="center"
-        android:paddingTop="15dp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
         android:weightSum="2"
         android:orientation="vertical">
         <Button
             android:id="@+id/buttonHost"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="ADVERTISE"
-            android:layout_weight="1" />
+            android:text="HOST"
+            android:layout_weight="1"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"/>
 
         <Button
             android:id="@+id/buttonClient"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="CLIENT"
-            android:layout_weight="1" />
+            android:text="ATTENDEE"
+            android:layout_weight="1"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"/>
     </LinearLayout>
 </LinearLayout>

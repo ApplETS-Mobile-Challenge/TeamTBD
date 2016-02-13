@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="eventTittle"
+        android:text="eventTitle"
         android:textAlignment="center"
         android:textSize="50dp"
         android:id="@+id/eventTittle"/>
@@ -29,14 +29,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pot : "
-                android:textAlignment="textEnd"
+                android:textAlignment="center"
                 android:textSize="30dp"
                 android:id="@+id/pot" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="potValue"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textSize="30dp"
                 android:id="@+id/potValue" />
@@ -48,13 +48,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Chance : "
-                android:textAlignment="textEnd"
+                android:textAlignment="center"
                 android:textSize="30dp"
                 android:id="@+id/chance" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="chanceValue"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textSize="30dp"
                 android:id="@+id/chanceValue" />
@@ -72,7 +72,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ticketsValue"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textSize="30dp"
                 android:id="@+id/ticketsValue" />

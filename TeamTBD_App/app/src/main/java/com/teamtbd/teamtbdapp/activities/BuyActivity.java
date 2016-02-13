@@ -7,20 +7,24 @@ import android.view.View;
 import android.widget.Button;
 
 import com.teamtbd.teamtbdapp.R;
+import com.teamtbd.teamtbdapp.services.EventService;
 
 public class BuyActivity extends AppCompatActivity {
+
+    private EventService eventService = new EventService(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy);
 
-        final AppCompatActivity activity = this;
 
+        final AppCompatActivity activity = this;
         Button buttonValidate = (Button)findViewById(R.id.validateBuy);
         buttonValidate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(activity, ClientActivity.class);
                 startActivity(i);
             }
