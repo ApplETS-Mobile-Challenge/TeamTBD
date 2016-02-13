@@ -5,5 +5,9 @@ module.exports = mongoose.model('Event', {
     hostID: String,
     name: String,
     tickets: [String],
-    uniqueUsers: [String]
+    uniqueUsers: [String],
+    winnerID: String,
+    contestStarted: Boolean,
+    canBuyTickets: Boolean,
+    price: Number
 });
