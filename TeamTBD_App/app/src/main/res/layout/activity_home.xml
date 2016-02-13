@@ -28,7 +28,7 @@
             android:id="@+id/buttonHost"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="PUBLISH"
+            android:text="ADVERTISE"
             android:layout_weight="1" />
 
         <Button
