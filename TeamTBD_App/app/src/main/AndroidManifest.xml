@@ -10,29 +10,33 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-		<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
         <meta-data
             android:name="com.google.android.nearby.messages.API_KEY"
             android:value="AIzaSyBXrRRYRH9bax1Ok2A6sXC3SgNkAGcNVQQ" />
-
-        <meta-data android:name="com.google.android.gms.nearby.connection.SERVICE_ID"
+        <meta-data
+            android:name="com.google.android.gms.nearby.connection.SERVICE_ID"
             android:value="@string/service_id" />
-		
-		<activity android:name="com.facebook.FacebookActivity"
-          android:configChanges=
-                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-          android:theme="@android:style/Theme.Translucent.NoTitleBar"
-          android:label="@string/app_name" />
-		
-        <activity android:name=".activities.HomeActivity">
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".activities.HomeActivity"></activity>
+        <activity android:name=".activities.ClientActivity" />
+        <activity android:name=".activities.HostActivity" />
+        <activity android:name=".activities.HostListActivity">
+        </activity>
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ClientActivity" />
-        <activity android:name=".activities.HostActivity"></activity>
     </application>
 
 </manifest>

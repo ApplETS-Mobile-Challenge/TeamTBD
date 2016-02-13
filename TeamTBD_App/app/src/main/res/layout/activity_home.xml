@@ -9,7 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".activities.HomeActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/layout">
 
     <TextView
         android:id="@+id/testTextView"
@@ -22,7 +23,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:weightSum="2"
+        android:weightSum="3"
         android:orientation="vertical">
         <Button
             android:id="@+id/buttonHost"
@@ -35,7 +36,14 @@
             android:id="@+id/buttonClient"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="CLIENT"
+            android:text="DISCOVER"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/buttonStrobe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="START"
             android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>

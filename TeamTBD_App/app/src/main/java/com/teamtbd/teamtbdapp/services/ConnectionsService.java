@@ -1,6 +1,7 @@
 package com.teamtbd.teamtbdapp.services;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,6 +16,8 @@ import com.google.android.gms.nearby.connection.AppIdentifier;
 import com.google.android.gms.nearby.connection.AppMetadata;
 import com.google.android.gms.nearby.connection.Connections;
 import com.teamtbd.teamtbdapp.R;
+import com.teamtbd.teamtbdapp.events.Bus;
+import com.teamtbd.teamtbdapp.events.ColorChangeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,8 @@ public class ConnectionsService implements
 
     private Context context;
     private GoogleApiClient googleApiClient;
+
+    private String otherEndpointID;
 
     public ConnectionsService(Context context) {
         this.context = context;
@@ -105,6 +110,7 @@ public class ConnectionsService implements
                 public void onResult(Status status) {
                     if (status.isSuccess()) {
                         Toast.makeText(context, "Connected to " + remoteEndpoint, Toast.LENGTH_SHORT).show();
+                        otherEndpointID = remoteEndpointId;
                     } else {
                         Toast.makeText(context, "Failed to connect to: " + remoteEndpoint, Toast.LENGTH_SHORT).show();
                     }
@@ -136,7 +142,7 @@ public class ConnectionsService implements
                 });
     }
 
-    public void connectTo(String endpointId, final String endpointName) {
+    public void connectTo(final String endpointId, final String endpointName) {
         // Send a connection request to a remote endpoint. By passing 'null' for
         // the name, the Nearby Connections API will construct a default name
         // based on device model such as 'LGE Nexus 5'.
@@ -146,7 +152,8 @@ public class ConnectionsService implements
             @Override
             public void onConnectionResponse(String remoteEndpointId, Status status, byte[] bytes) {
                 if (status.isSuccess()) {
-                    Toast.makeText(context, "Connected! Endpoint: " + remoteEndpointId, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Connected! Endpoint: " + endpointId, Toast.LENGTH_LONG).show();
+                    otherEndpointID = endpointId;
                 } else {
                     Log.e("_TEAM_TBD_", "Could not connect to endpoint.");
                 }
@@ -166,13 +173,33 @@ public class ConnectionsService implements
     }
 
     @Override
-    public void onMessageReceived(String s, byte[] bytes, boolean b) {
-
+    public void onMessageReceived(String endpointId, byte[] payload, boolean isReliable) {
+        String message = new String(payload);
+        Log.d("fuckoff", message);
+        if(message.substring(0, message.indexOf('/')).equals("COLOR")) {
+            String[] splittedColors = message.substring(message.indexOf('/')).split("/");
+            Log.d("fuckoff", splittedColors.toString());
+            Bus.getInstance().post(new ColorChangeEvent(Color.rgb(Integer.parseInt(splittedColors[0]), Integer.parseInt(splittedColors[1]), Integer.parseInt(splittedColors[2]))));
+        }
     }
 
     @Override
-    public void onDisconnected(String s) {
+    public void onDisconnected(String endpointID) {
 
     }
     /* Client */
+
+    /* Shared */
+    public void sendMessage(String messageText) {
+        Nearby.Connections.sendReliableMessage(googleApiClient, otherEndpointID, messageText.getBytes());
+    }
+
+    public boolean isConnectedToEndPoint() {
+        return otherEndpointID != null;
+    }
+
+    public boolean isHost() {
+        return isHost;
+    }
+    /* Shared */
 }
