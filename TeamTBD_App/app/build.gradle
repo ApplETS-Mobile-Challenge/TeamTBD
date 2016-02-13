@@ -20,6 +20,10 @@ android {
     }
 }
 
+repositories {
+        mavenCentral()
+    }
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -27,4 +31,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-nearby:8.4.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'org.greenrobot:eventbus:3.0.0'
+	compile 'com.facebook.android:facebook-android-sdk:[4,5)' 
 }
