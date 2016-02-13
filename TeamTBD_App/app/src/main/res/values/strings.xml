@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">TeamTBDApp</string>
-	<string name="facebook_app_id">834720529983179</string>
+    <string name="facebook_app_id">834720529983179</string>
     <string name="service_id">com.teamtbd.teamtbdapp</string>
 
-	<string name="draftType_prompt">Choose a type</string>
+    <string name="draftType_prompt">Choose a type</string>
     <string-array name="draftType_arrays">
         <item>Running Man</item>
         <item>Color Frenzy</item>
         <item>Wheel of Chance</item>
     </string-array>
+    <string name="title_activity_logged_in">LoggedInActivity</string>
 </resources>
