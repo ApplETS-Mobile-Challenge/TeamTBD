@@ -8,8 +8,11 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 
 import com.teamtbd.teamtbdapp.R;
+import com.teamtbd.teamtbdapp.services.EventService;
 
 public class BuyActivity extends AppCompatActivity {
+
+    private EventService eventService = new EventService(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +23,6 @@ public class BuyActivity extends AppCompatActivity {
         nbrTickets.setMinValue(0);
 
         final AppCompatActivity activity = this;
-
         Button buttonValidate = (Button)findViewById(R.id.validateBuy);
         buttonValidate.setOnClickListener(new View.OnClickListener() {
             @Override

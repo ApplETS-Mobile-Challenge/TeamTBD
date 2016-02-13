@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="How many?"
+        android:text="Number of tickets"
         android:textAlignment="center"
         android:textSize="50dp"
         android:id="@+id/ticketsTittle"/>
@@ -42,6 +42,6 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ok"
+        android:text="Buy"
         android:id="@+id/validateBuy"/>
 </LinearLayout>
