@@ -1,6 +1,7 @@
 package com.teamtbd.teamtbdapp.services;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -9,7 +10,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.Profile;
 import com.teamtbd.teamtbdapp.events.Bus;
+import com.teamtbd.teamtbdapp.events.EventCreationEvent;
 import com.teamtbd.teamtbdapp.events.TestEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -26,13 +29,13 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public void createEvent(String eventName, String hostID) {
+    public void createEvent(String eventName, String hostID, int price) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/create", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/create/" + hostID + "/" + eventName + "/" + price, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                eventBus.post(new TestEvent(response));
-                Log.i("_TEAM_TBD_", "TestEvent posted.");
+                Log.i("_TEAM_TBD_", "Event successfully created. " + response);
+                eventBus.post(new EventCreationEvent(response));
             }
         }, new Response.ErrorListener() {
             @Override

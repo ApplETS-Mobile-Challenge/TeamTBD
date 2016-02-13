@@ -8,7 +8,7 @@ public interface IEventService {
      * @param hostID ID de l'utilisateur qui host l'événement
      * @return L'ID de l'événement créé.
      */
-    public void createEvent(String eventName, String hostID);
+    public void createEvent(String eventName, String hostID, int price);
 
 
     /**
