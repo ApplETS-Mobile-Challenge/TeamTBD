@@ -58,6 +58,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
+
+        if(AccessToken.getCurrentAccessToken() != null) {
+            Intent i = new Intent(this, HomeActivity.class);
+            startActivity(i);
+        }
+
         setContentView(R.layout.activity_login);
 
         final AppCompatActivity activity = this;

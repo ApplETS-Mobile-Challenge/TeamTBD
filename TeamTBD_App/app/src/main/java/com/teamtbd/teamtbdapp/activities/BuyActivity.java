@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.facebook.Profile;
 import com.teamtbd.teamtbdapp.R;
 import com.teamtbd.teamtbdapp.events.Bus;
 import com.teamtbd.teamtbdapp.events.UpdateTotalEvent;
@@ -21,7 +22,7 @@ public class BuyActivity extends AppCompatActivity {
     private EventService eventService = new EventService(this);
     private EditText ticketsNumber;
     private TextView ticketsTotal;
-    private String eventId;
+    private String eventId = "309ca6d1-e12d-3d3a-68df-1aaa0de6e42a";
     private EventBus eventBus = Bus.getInstance();
 
 
@@ -35,21 +36,13 @@ public class BuyActivity extends AppCompatActivity {
 
         final AppCompatActivity activity = this;
 
-        ticketsTotal.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-
-                if (!hasFocus) {
-                   eventService.getTicketPrice(eventId);
-                }
-            }
-        });
+        eventService.getTicketPrice(eventId);
 
         Button buttonValidate = (Button)findViewById(R.id.validateBuy);
         buttonValidate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /* create new tickets eventService.getTickets(eventId, Profile.getCurrentProfile().getId(), Integer.parseInt(ticketsNumber.getText().toString())); */
+                eventService.getTickets(eventId, Profile.getCurrentProfile().getId(), Integer.parseInt(ticketsNumber.getText().toString()));
                 Intent i = new Intent(activity, ClientActivity.class);
                 startActivity(i);
             }
@@ -70,7 +63,7 @@ public class BuyActivity extends AppCompatActivity {
 
     @Subscribe
     public void updateTotal(UpdateTotalEvent event){
-        ticketsTotal.setText((Integer.parseInt(ticketsNumber.getText().toString()) * Integer.parseInt(event.content)) + "");
+        ticketsTotal.setText((Integer.parseInt(ticketsNumber.getText().toString()) * Integer.parseInt(event.content)));
     }
 
 }

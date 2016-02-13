@@ -28,14 +28,16 @@
 
         <activity android:name=".activities.HostListActivity"></activity>
         <activity android:name=".activities.HomeActivity">
+
+        </activity>
+        <activity android:name=".activities.AnimationActivity"></activity>
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.AnimationActivity"></activity>
-        <activity android:name=".activities.LoginActivity"></activity>
         <activity android:name=".activities.ClientActivity"></activity>
         <activity android:name=".activities.HostActivity"></activity>
         <activity android:name=".activities.LoggedInActivity"></activity>

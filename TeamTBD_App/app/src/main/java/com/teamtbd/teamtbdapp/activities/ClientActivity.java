@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.facebook.Profile;
 import com.teamtbd.teamtbdapp.R;
 import com.teamtbd.teamtbdapp.events.Bus;
 import com.teamtbd.teamtbdapp.events.TicketEvent;
@@ -36,12 +37,9 @@ public class ClientActivity extends AppCompatActivity {
         tickets.setText("0");
 
         eventService = new EventService(this);
-        eventService.getTicketPrice("");
-        eventService.getName("");
-        eventService.getOnesTickets("","");
-        eventService.getTotalTickets("");
-
-
+        eventService.getTicketPrice("309ca6d1-e12d-3d3a-68df-1aaa0de6e42a");
+        eventService.getName("309ca6d1-e12d-3d3a-68df-1aaa0de6e42a");
+        eventService.getOnesTickets("309ca6d1-e12d-3d3a-68df-1aaa0de6e42a", Profile.getCurrentProfile().getId());
 
         final AppCompatActivity activity = this;
         Button buttonBuy = (Button)findViewById(R.id.buyTickets);
@@ -65,7 +63,7 @@ public class ClientActivity extends AppCompatActivity {
     @Subscribe
     public  void updateTickets(TicketEvent event){
         tickets.setText(event.content);
-        eventService.getTotalTickets("");
+        eventService.getTotalTickets("309ca6d1-e12d-3d3a-68df-1aaa0de6e42a");
     }
     @Subscribe
     public  void updateTotalTickets(TotalTicketEvent event){

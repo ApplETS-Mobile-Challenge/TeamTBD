@@ -88,7 +88,7 @@ public class EventService implements IEventService {
 
     public void getTicketPrice(String eventID) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/" + eventID + "/price/", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/" + eventID + "/price", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i("_TEAM_TBD_", "getTicketPrice posted.");
