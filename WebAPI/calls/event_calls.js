@@ -21,7 +21,7 @@ exports.getAllEvents = function(req, res){
         var eventMap = {};
 
         events.forEach(function(event) {
-            userMap[event._id] = event;
+            eventMap[event._id] = event;
         });
 
         res.send(eventMap);
@@ -157,6 +157,26 @@ exports.getName = function (req, res) {
             res.json('Try to fool me, this event does not exist.');
         } else {
             res.json(id.name);
+        }
+    });
+};
+
+exports.getPrice = function(req, res){
+    Event.findOne({'id': req.params.id}, function (err, id) {
+        if (!id) {
+            res.json('Try to fool me, this event does not exist.');
+        } else {
+            res.json(id.price);
+        }
+    });
+};
+
+exports.getTicketCount = function(req, res){
+    Event.findOne({'id': req.params.id}, function (err, id) {
+        if (!id) {
+            res.json('Try to fool me, this event does not exist.');
+        } else {
+            res.json(id.tickets.length);
         }
     });
 };
