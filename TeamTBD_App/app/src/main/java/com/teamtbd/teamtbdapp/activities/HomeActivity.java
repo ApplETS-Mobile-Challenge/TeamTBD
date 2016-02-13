@@ -1,5 +1,6 @@
 package com.teamtbd.teamtbdapp.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,11 +31,14 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         testTextView = (TextView)findViewById(R.id.testTextView);
 
+        final AppCompatActivity activity = this;
+
         Button buttonHost = (Button)findViewById(R.id.buttonHost);
         buttonHost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                connectionsService.startAdvertising();
+                Intent i = new Intent(activity,LoginActivity.class);
+                startActivity(i);
             }
         });
 

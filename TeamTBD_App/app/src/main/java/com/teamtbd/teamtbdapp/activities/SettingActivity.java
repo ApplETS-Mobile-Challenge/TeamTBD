@@ -3,6 +3,8 @@ package com.teamtbd.teamtbdapp.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.teamtbd.teamtbdapp.R;
+
 public class SettingActivity extends AppCompatActivity {
 
     @Override
