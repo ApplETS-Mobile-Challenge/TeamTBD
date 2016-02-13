@@ -33,43 +33,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:weightSum="2">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Pot : "
-                android:textAlignment="center"
+                android:textAlignment="textEnd"
                 android:textSize="30dp"
-                android:id="@+id/pot" />
+                android:id="@+id/pot"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text=""
                 android:textAlignment="textStart"
                 android:textSize="30dp"
-                android:id="@+id/potValue" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Chance : "
-                android:textAlignment="center"
-                android:textSize="30dp"
-                android:id="@+id/chance" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textAlignment="textStart"
-                android:textSize="30dp"
-                android:id="@+id/chanceValue" />
+                android:id="@+id/potValue"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -77,21 +59,47 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="center"
-            android:textAlignment="center">
+            android:weightSum="2">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tickets : "
-                android:textAlignment="center"
+                android:text="Chance : "
+                android:textAlignment="textEnd"
                 android:textSize="30dp"
-                android:id="@+id/tickets" />
+                android:id="@+id/chance"
+                android:layout_weight="1"  />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textAlignment="textStart"
                 android:textSize="30dp"
-                android:id="@+id/ticketsValue" />
+                android:id="@+id/chanceValue"
+                android:layout_weight="1"  />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tickets : "
+                android:textAlignment="textEnd"
+                android:textSize="30dp"
+                android:id="@+id/tickets"
+                android:layout_weight="1"  />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textSize="30dp"
+                android:id="@+id/ticketsValue"
+                android:layout_weight="1"  />
         </LinearLayout>
         </LinearLayout>
         <LinearLayout
