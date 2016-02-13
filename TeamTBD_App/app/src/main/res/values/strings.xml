@@ -9,4 +9,5 @@
         <item>Color Frenzy</item>
         <item>Wheel of Chance</item>
     </string-array>
+    <string name="title_activity_logged_in">LoggedInActivity</string>
 </resources>

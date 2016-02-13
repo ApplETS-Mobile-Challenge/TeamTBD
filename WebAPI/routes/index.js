@@ -12,10 +12,11 @@ router.get('/users/:id', userCalls.getUser);
 router.get('/users/create/:id/:firstName/:lastName/:picURL', userCalls.createUser);
 router.get('/users/wipe/all', userCalls.wipeAll);
 
-router.get('/events/create/:id/:hostID/:name', eventCalls.createEvent);
+router.get('/events/create/:hostID/:name', eventCalls.createEvent);
 router.get('/events/:id/users/', eventCalls.getUsers);
 router.get('/events/:id/tickets/:userID/:count', eventCalls.addTicketsToUser);
 router.get('/events/:id/winner', eventCalls.getWinner);
 router.get('/events/:id/wipetickets', eventCalls.removeTickets);
+router.get('/events/:id/name', eventCalls.getName);
 
 module.exports = router;

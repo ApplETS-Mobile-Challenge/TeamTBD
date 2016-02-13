@@ -16,7 +16,6 @@ public class ClientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_client);
 
         final AppCompatActivity activity = this;
-
         Button buttonBuy = (Button)findViewById(R.id.buyTickets);
         buttonBuy.setOnClickListener(new View.OnClickListener() {
             @Override

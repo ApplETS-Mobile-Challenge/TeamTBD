@@ -24,42 +24,10 @@ public class FacebookSocialManager{
 
     boolean loginSuccess = false;
 
-    CallbackManager callbackManager;
-
-    private ProfileTracker profileTracker;
 
     public FacebookSocialManager(Activity activity) {
         this.activity = activity;
-        FacebookSdk.sdkInitialize(activity.getApplicationContext());
 
-        if (AccessToken.getCurrentAccessToken() == null) {
-            callbackManager = CallbackManager.Factory.create();
-            profileTracker = new ProfileTracker() {
-                @Override
-                protected void onCurrentProfileChanged(Profile profile, Profile profile1) {
-                    Profile.setCurrentProfile(profile1);
-                }
-            };
-            profileTracker.startTracking();
-
-            LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                @Override
-                public void onSuccess(LoginResult loginResult) {
-                    // TODO
-                    loginSuccess = true;
-                }
-
-                @Override
-                public void onCancel() {
-                    loginSuccess = false;
-                }
-
-                @Override
-                public void onError(FacebookException e) {
-                    loginSuccess = false;
-                }
-            });
-        }
     }
 
     public void login() {
@@ -104,7 +72,6 @@ public class FacebookSocialManager{
 
 
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     public void onDestroy() {
