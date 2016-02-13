@@ -1,7 +1,6 @@
 package com.teamtbd.teamtbdapp.services;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -10,15 +9,19 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.facebook.Profile;
 import com.teamtbd.teamtbdapp.events.Bus;
+import com.teamtbd.teamtbdapp.events.StartedContestEvent;
 import com.teamtbd.teamtbdapp.events.EventCreationEvent;
-import com.teamtbd.teamtbdapp.events.TestEvent;
+import com.teamtbd.teamtbdapp.events.LoadedEventList;
 import com.teamtbd.teamtbdapp.events.TicketEvent;
 import com.teamtbd.teamtbdapp.events.TitleEvent;
 import com.teamtbd.teamtbdapp.events.TotalTicketEvent;
 import com.teamtbd.teamtbdapp.events.UpdateTotalEvent;
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 
 public class EventService implements IEventService {
@@ -129,6 +132,103 @@ public class EventService implements IEventService {
             public void onResponse(String response) {
                 eventBus.post(new TicketEvent(response));
                 Log.i("_TEAM_TBD_", "getOnesTickets posted.");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("_TEAM_TBD_", error.networkResponse.data.toString());
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
+    public void getEventList(){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                ArrayList<String> events = new ArrayList<>();
+                try {
+                    JSONArray root = new JSONArray(response);
+                    for(int i = 0; i < root.length(); i++){
+                        events.add(root.getString(i));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                eventBus.post(new LoadedEventList(events));
+                Log.i("_TEAM_TBD_", "got list of events..");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("_TEAM_TBD_", error.networkResponse.data.toString());
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
+    public void getContestStatus(String eventID){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/" + eventID + "/contestStarted", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                eventBus.post(new StartedContestEvent(response));
+                Log.i("_TEAM_TBD_", "got list of events..");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("_TEAM_TBD_", error.networkResponse.data.toString());
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
+    public void setContestStatus(String eventID, String status){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/" + eventID + "/setconteststarted/" + status, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("_TEAM_TBD_", "got list of events..");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("_TEAM_TBD_", error.networkResponse.data.toString());
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
+    public void setWinner(String eventID){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/" + eventID + "/calculatewinner", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("_TEAM_TBD_", "got list of events..");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("_TEAM_TBD_", error.networkResponse.data.toString());
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
+    public void isWinning(String eventID, String userID){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/" + eventID + "/iswinner/" + userID, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                eventBus.post(new StartedContestEvent(response));
+                Log.i("_TEAM_TBD_", "got list of events..");
             }
         }, new Response.ErrorListener() {
             @Override

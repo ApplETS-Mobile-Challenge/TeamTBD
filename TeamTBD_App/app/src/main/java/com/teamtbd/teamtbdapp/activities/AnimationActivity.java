@@ -23,7 +23,7 @@ public class AnimationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation);
-        final boolean won = getIntent().getExtras().getBoolean("won");
+        final boolean won = true;
         layout = (LinearLayout)findViewById(R.id.animationBackground);
 
         label = (TextView)findViewById(R.id.label);

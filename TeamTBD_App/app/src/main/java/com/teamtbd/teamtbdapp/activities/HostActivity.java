@@ -2,6 +2,8 @@ package com.teamtbd.teamtbdapp.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.teamtbd.teamtbdapp.R;
@@ -16,10 +18,14 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class HostActivity extends AppCompatActivity {
     private String eventId;
-    private int price;
+    private int price = 0;
     private EventBus eventBus = Bus.getInstance();
     private TextView title, pot;
     private EventService eventService;
+    private TextView ticketsValue;
+
+    private Button stopSelling;
+    private Button startDraft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,8 @@ public class HostActivity extends AppCompatActivity {
 
         title = (TextView)findViewById(R.id.eventTittle);
         pot = (TextView)findViewById(R.id.potValue);
+        ticketsValue = (TextView)findViewById(R.id.ticketsValue);
+
 
         eventId = getIntent().getStringExtra("eventId");
 
@@ -35,10 +43,23 @@ public class HostActivity extends AppCompatActivity {
         eventService.getTicketPrice(eventId);
         eventService.getName(eventId);
         eventService.getTotalTickets(eventId);
+
+        startDraft = (Button)findViewById(R.id.startDraft);
+        startDraft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventService.setContestStatus(eventId, "" + 1);
+                eventService.setWinner(eventId);
+            }
+        });
+
+
+        ticketsValue.setText("" + price);
     }
     @Subscribe
     public void updatePrice(UpdateTotalEvent event){
         price = Integer.parseInt(event.content);
+        ticketsValue.setText(price + "$");
     }
 
     @Subscribe

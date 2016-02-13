@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="eventTittle"
+        android:text=""
         android:textAlignment="center"
         android:textSize="50dp"
         android:id="@+id/eventTittle"/>
@@ -35,7 +35,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="potValue"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textSize="30dp"
                 android:id="@+id/potValue" />
@@ -58,7 +58,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ticketsValue"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textSize="30dp"
                 android:id="@+id/ticketsValue" />

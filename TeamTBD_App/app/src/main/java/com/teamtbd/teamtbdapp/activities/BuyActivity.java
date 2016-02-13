@@ -22,7 +22,7 @@ public class BuyActivity extends AppCompatActivity {
     private EventService eventService = new EventService(this);
     private EditText ticketsNumber;
     private TextView ticketsTotal;
-    private String eventId = "309ca6d1-e12d-3d3a-68df-1aaa0de6e42a";
+    private String eventId;
     private EventBus eventBus = Bus.getInstance();
 
 
@@ -36,6 +36,8 @@ public class BuyActivity extends AppCompatActivity {
 
         final AppCompatActivity activity = this;
 
+        eventId = getIntent().getExtras().getString("ID");
+
         eventService.getTicketPrice(eventId);
 
         Button buttonValidate = (Button)findViewById(R.id.validateBuy);
@@ -44,6 +46,7 @@ public class BuyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 eventService.getTickets(eventId, Profile.getCurrentProfile().getId(), Integer.parseInt(ticketsNumber.getText().toString()));
                 Intent i = new Intent(activity, ClientActivity.class);
+                i.putExtra("ID", eventId);
                 startActivity(i);
             }
         });
