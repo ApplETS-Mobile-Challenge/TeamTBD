@@ -11,6 +11,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.teamtbd.teamtbdapp.events.Bus;
 import com.teamtbd.teamtbdapp.events.TestEvent;
+import com.teamtbd.teamtbdapp.events.TicketEvent;
+import com.teamtbd.teamtbdapp.events.TitleEvent;
+import com.teamtbd.teamtbdapp.events.TotalTicketEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -52,6 +55,60 @@ public class EventService implements IEventService {
             public void onResponse(String response) {
                 eventBus.post(new TestEvent(response));
                 Log.i("_TEAM_TBD_", "getTickets posted.");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("_TEAM_TBD_", error.networkResponse.data.toString());
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
+    public void getName(String eventID) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/" + eventID + "/name", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                eventBus.post(new TitleEvent(response));
+                Log.i("_TEAM_TBD_", "getName posted.");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("_TEAM_TBD_", error.networkResponse.data.toString());
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
+    public void getTotalTickets(String eventID) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/" + eventID + "/tickets/count", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                eventBus.post(new TotalTicketEvent(response));
+                Log.i("_TEAM_TBD_", "getTotalTickets posted.");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("_TEAM_TBD_", error.networkResponse.data.toString());
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
+    public void getOnesTickets(String eventID, String userID) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/" + eventID + "/tickets/count/" + userID, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                eventBus.post(new TicketEvent(response));
+                Log.i("_TEAM_TBD_", "getOnesTickets posted.");
             }
         }, new Response.ErrorListener() {
             @Override
