@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -29,10 +30,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 public class HomeActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    private GoogleApiClient googleApiClient;
     private EventService eventService = new EventService(this);
     private EventBus eventBus = Bus.getInstance();
 
+    private GoogleApiClient googleApiClient;
     private MessageListener messageListener;
 
     private TextView testTextView;
@@ -40,6 +41,13 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final AppCompatActivity currentActivity = this;
+        messageListener = new MessageListener() {
+            @Override
+            public void onFound(Message message) {
+                Toast.makeText(currentActivity, "Received a message! " + new String(message.getContent()), Toast.LENGTH_LONG).show();
+            }
+        };
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -49,14 +57,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
 
         if(!googleApiClient.isConnected() && !googleApiClient.isConnecting())
             googleApiClient.connect();
-
-        final AppCompatActivity currentActivity = this;
-        messageListener = new MessageListener() {
-            @Override
-            public void onFound(Message message) {
-                Toast.makeText(currentActivity, "Received a message! " + new String(message.getContent()), Toast.LENGTH_LONG).show();
-            }
-        };
 
         setContentView(R.layout.activity_home);
 
@@ -90,17 +90,20 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     protected void onResume() {
         super.onResume();
         eventBus.register(this);
+        AppEventsLogger.activateApp(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         eventBus.unregister(this);
+        AppEventsLogger.deactivateApp(this);
     }
 
     @Subscribe
     public void onTestEvent(TestEvent event) {
         testTextView.setText(event.content);
+        Log.i("_TEAM_TBD_", "TestEvent received.");
     }
 
     @Override

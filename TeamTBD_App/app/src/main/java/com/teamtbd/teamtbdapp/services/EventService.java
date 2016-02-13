@@ -32,6 +32,7 @@ public class EventService implements IEventService {
             @Override
             public void onResponse(String response) {
                 eventBus.post(new TestEvent(response));
+                Log.i("_TEAM_TBD_", "TestEvent posted.");
             }
         }, new Response.ErrorListener() {
             @Override
