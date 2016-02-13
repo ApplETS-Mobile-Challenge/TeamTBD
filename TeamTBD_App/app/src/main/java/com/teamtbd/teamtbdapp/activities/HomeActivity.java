@@ -6,15 +6,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.nearby.Nearby;
+import com.google.android.gms.nearby.connection.Connections;
 import com.google.android.gms.nearby.messages.Message;
+import com.google.android.gms.nearby.messages.MessageListener;
 import com.google.android.gms.nearby.messages.PublishCallback;
 import com.google.android.gms.nearby.messages.PublishOptions;
+import com.google.android.gms.nearby.messages.SubscribeCallback;
+import com.google.android.gms.nearby.messages.SubscribeOptions;
 import com.teamtbd.teamtbdapp.R;
 import com.teamtbd.teamtbdapp.events.Bus;
 import com.teamtbd.teamtbdapp.events.TestEvent;
@@ -27,6 +32,8 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     private GoogleApiClient googleApiClient;
     private EventService eventService = new EventService(this);
     private EventBus eventBus = Bus.getInstance();
+
+    private MessageListener messageListener;
 
     private TextView testTextView;
 
@@ -43,30 +50,40 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         if(!googleApiClient.isConnected() && !googleApiClient.isConnecting())
             googleApiClient.connect();
 
+        final AppCompatActivity currentActivity = this;
+        messageListener = new MessageListener() {
+            @Override
+            public void onFound(Message message) {
+                Toast.makeText(currentActivity, "Received a message! " + new String(message.getContent()), Toast.LENGTH_LONG).show();
+            }
+        };
+
         setContentView(R.layout.activity_home);
 
         testTextView = (TextView)findViewById(R.id.testTextView);
 
-        final AppCompatActivity currentActivity = this;
+
         Button buttonHost = (Button)findViewById(R.id.buttonHost);
         buttonHost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(currentActivity, HostActivity.class);
-                startActivity(i);
+                /*Intent i = new Intent(currentActivity, HostActivity.class);
+                startActivity(i);*/
+                publish();
             }
         });
 
-        Button buttonClient = (Button)findViewById(R.id.buttonClient);
+        Button buttonClient = (Button) findViewById(R.id.buttonClient);
         buttonClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(currentActivity, ClientActivity.class);
-                startActivity(i);
+                /*Intent i = new Intent(currentActivity, ClientActivity.class);
+                startActivity(i);*/
+                subscribe();
             }
         });
 
-        eventService.createEvent("", "");
+        //eventService.createEvent("", "");
     }
 
     @Override
@@ -89,7 +106,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     public void onConnected(Bundle bundle) {
         Log.i("_TEAM_TBD_", "Connected to Google API Services!!!! :D");
-        testNearby();
     }
 
     @Override
@@ -102,7 +118,30 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         Log.i("_TEAM_TBD_", "Connection to Google API Services failed!");
     }
 
-    private void testNearby() {
+    private void subscribe() {
+        SubscribeOptions options = new SubscribeOptions.Builder()
+                .setCallback(new SubscribeCallback() {
+                    @Override
+                    public void onExpired() {
+                        super.onExpired();
+                    }
+                }).build();
+
+        Nearby.Messages.subscribe(googleApiClient, messageListener, options)
+                .setResultCallback(new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        if(status.isSuccess())
+                            Log.i("_TEAM_TBD_", "Subscribed successfully.");
+                        else {
+                            Log.i("_TEAM_TBD_", "Could not subscribe.");
+                            Log.i("_TEAM_TBD", "" + status.toString());
+                        }
+                    }
+                });
+    }
+
+    private void publish() {
         Message message = new Message("test".getBytes());
 
         PublishOptions options = new PublishOptions.Builder().setCallback(new PublishCallback() {
