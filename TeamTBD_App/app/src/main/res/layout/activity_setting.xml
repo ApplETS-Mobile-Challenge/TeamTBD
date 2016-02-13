@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.teamtbd.teamtbdapp.activities.ClientActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event Settings"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:id="@+id/eventSetting"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name : "
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:id="@+id/name"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:minWidth="60dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:id="@+id/eventName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Draft : "
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:id="@+id/draft"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/draftType"
+            android:prompt="@strings/draftType_prompt"
+            android:entries="@array/draftType_arrays"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price : "
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:id="@+id/price"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:minWidth="60dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:id="@+id/priceValue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:id="@+id/dollarSign"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Finish"
+        android:id="@+id/finishSettings"/>
+
+</LinearLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,6 +7,87 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.teamtbd.teamtbdapp.activities.ClientActivity">
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="eventTittle"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:id="@+id/eventTittle"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <TableRow
+            android:gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pot : "
+                android:textAlignment="textEnd"
+                android:textSize="30dp"
+                android:id="@+id/pot" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="potValue"
+                android:textAlignment="textStart"
+                android:textSize="30dp"
+                android:id="@+id/potValue" />
+        </TableRow>
+
+        <TableRow
+            android:gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chance : "
+                android:textAlignment="textEnd"
+                android:textSize="30dp"
+                android:id="@+id/chance" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="chanceValue"
+                android:textAlignment="textStart"
+                android:textSize="30dp"
+                android:id="@+id/chanceValue" />
+        </TableRow>
+
+        <TableRow
+            android:gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tickets : "
+                android:textAlignment="textEnd"
+                android:textSize="30dp"
+                android:id="@+id/tickets" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ticketsValue"
+                android:textAlignment="textStart"
+                android:textSize="30dp"
+                android:id="@+id/ticketsValue" />
+        </TableRow>
+
+        <TableRow
+            android:gravity="center">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Buy tickets"
+                android:id="@+id/buyTickets" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
+
+

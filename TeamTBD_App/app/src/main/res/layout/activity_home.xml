@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:weightSum="2"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <Button
             android:id="@+id/buttonHost"
             android:layout_width="match_parent"
