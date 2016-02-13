@@ -4,8 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:textAlignment="center"
     android:id="@+id/animationBackground"
     android:orientation="vertical"
     tools:context="com.teamtbd.teamtbdapp.activities.AnimationActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="150dp"
+        android:id="@+id/label"
+        android:textAlignment="center"
+        android:textSize="90dp"/>
 
 </LinearLayout>

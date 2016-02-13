@@ -35,6 +35,7 @@
         </activity>
 
         <activity android:name=".activities.HomeActivity"></activity>
+        <activity android:name=".activities.AnimationActivity"></activity>
         <activity android:name=".activities.LoginActivity"></activity>
         <activity android:name=".activities.ClientActivity"></activity>
         <activity android:name=".activities.HostActivity"></activity>
