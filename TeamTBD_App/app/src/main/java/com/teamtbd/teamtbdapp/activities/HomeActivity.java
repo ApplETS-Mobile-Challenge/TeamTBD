@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.facebook.appevents.AppEventsLogger;
 import com.teamtbd.teamtbdapp.R;
 import com.teamtbd.teamtbdapp.events.Bus;
 import com.teamtbd.teamtbdapp.events.TestEvent;
@@ -54,12 +55,14 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         eventBus.register(this);
+        AppEventsLogger.activateApp(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         eventBus.unregister(this);
+        AppEventsLogger.deactivateApp(this);
     }
 
     @Subscribe
