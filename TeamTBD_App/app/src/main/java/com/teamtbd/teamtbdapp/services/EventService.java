@@ -19,7 +19,7 @@ import org.greenrobot.eventbus.EventBus;
 
 
 public class EventService implements IEventService {
-    private final static String API_URL = "http://teamspeak.sirkhepre.net:3000/";
+    private final static String API_URL = "http://teamspeak.sirkhepre.net:8081/";
 
     private Context context;
     private EventBus eventBus = Bus.getInstance();

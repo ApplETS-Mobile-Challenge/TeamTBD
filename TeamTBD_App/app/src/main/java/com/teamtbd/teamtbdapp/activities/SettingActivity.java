@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.facebook.Profile;
 import com.teamtbd.teamtbdapp.R;
 import com.teamtbd.teamtbdapp.events.Bus;
 import com.teamtbd.teamtbdapp.events.EventCreationEvent;
@@ -35,7 +36,7 @@ public class SettingActivity extends AppCompatActivity {
         buttonFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                eventService.createEvent(eventName.getText().toString(), (String)draftType.getSelectedItem(), Integer.parseInt(price.getText().toString()));
+                eventService.createEvent(eventName.getText().toString(), Profile.getCurrentProfile().getId(), Integer.parseInt(price.getText().toString()));
             }
         });
     }

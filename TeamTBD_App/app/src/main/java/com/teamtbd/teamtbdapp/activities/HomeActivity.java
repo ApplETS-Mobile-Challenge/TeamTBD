@@ -35,8 +35,8 @@ public class HomeActivity extends AppCompatActivity {
         buttonHost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent i = new Intent(activity, LoginActivity.class);
-                    startActivity(i);
+                Intent i = new Intent(activity, SettingActivity.class);
+                startActivity(i);
             }
         });
 
@@ -44,7 +44,8 @@ public class HomeActivity extends AppCompatActivity {
         buttonClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                connectionsService.startDiscovering();
+                Intent i = new Intent(activity, HostListActivity.class);
+                startActivity(i);
             }
         });
     }
