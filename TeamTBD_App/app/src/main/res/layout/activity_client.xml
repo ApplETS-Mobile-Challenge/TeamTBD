@@ -8,7 +8,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.teamtbd.teamtbdapp.activities.ClientActivity">
+    tools:context="com.teamtbd.teamtbdapp.activities.ClientActivity"
+    android:gravity="center_horizontal">
 
     <TextView
         android:layout_width="match_parent"
@@ -17,13 +18,21 @@
         android:textAlignment="center"
         android:textSize="50dp"
         android:id="@+id/eventTittle"/>
-
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:gravity="bottom">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
 
-        <TableRow
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:gravity="center">
             <TextView
                 android:layout_width="match_parent"
@@ -40,9 +49,12 @@
                 android:textAlignment="textStart"
                 android:textSize="30dp"
                 android:id="@+id/potValue" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:gravity="center">
             <TextView
                 android:layout_width="match_parent"
@@ -58,15 +70,19 @@
                 android:textAlignment="textStart"
                 android:textSize="30dp"
                 android:id="@+id/chanceValue" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow
-            android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:textAlignment="center">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tickets : "
-                android:textAlignment="textEnd"
+                android:textAlignment="center"
                 android:textSize="30dp"
                 android:id="@+id/tickets" />
             <TextView
@@ -76,18 +92,20 @@
                 android:textAlignment="textStart"
                 android:textSize="30dp"
                 android:id="@+id/ticketsValue" />
-        </TableRow>
-
-        <TableRow
-            android:gravity="center">
+        </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="bottom">
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Buy tickets"
                 android:id="@+id/buyTickets" />
-        </TableRow>
-    </TableLayout>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
 
 
