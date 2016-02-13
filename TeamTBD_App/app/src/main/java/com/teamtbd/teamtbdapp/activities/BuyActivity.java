@@ -19,9 +19,6 @@ public class BuyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy);
 
-        final NumberPicker nbrTickets = (NumberPicker)findViewById(R.id.ticketsNumber);
-        nbrTickets.setMinValue(0);
-
         final AppCompatActivity activity = this;
         Button buttonValidate = (Button)findViewById(R.id.validateBuy);
         buttonValidate.setOnClickListener(new View.OnClickListener() {

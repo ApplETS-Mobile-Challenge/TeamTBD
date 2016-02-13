@@ -39,6 +39,7 @@
         <activity android:name=".activities.ClientActivity"></activity>
         <activity android:name=".activities.HostActivity"></activity>
         <activity android:name=".activities.LoggedInActivity"></activity>
+        <activity android:name=".activities.BuyActivity"></activity>
     </application>
 
 </manifest>

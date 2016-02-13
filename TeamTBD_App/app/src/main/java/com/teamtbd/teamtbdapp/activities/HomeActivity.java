@@ -22,8 +22,6 @@ public class HomeActivity extends AppCompatActivity {
     private ConnectionsService connectionsService = new ConnectionsService(this);
     private EventBus eventBus = Bus.getInstance();
 
-    private TextView testTextView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +29,6 @@ public class HomeActivity extends AppCompatActivity {
         connectionsService.initGoogleAPI();
 
         setContentView(R.layout.activity_home);
-        testTextView = (TextView)findViewById(R.id.testTextView);
-
         final AppCompatActivity activity = this;
 
         Button buttonHost = (Button)findViewById(R.id.buttonHost);

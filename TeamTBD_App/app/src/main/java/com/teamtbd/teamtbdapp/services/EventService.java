@@ -28,7 +28,7 @@ public class EventService implements IEventService {
     @Override
     public void createEvent(String eventName, String hostID) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "random/10", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/create", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 eventBus.post(new TestEvent(response));
