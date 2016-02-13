@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Event Settings"
+        android:text="Edit an Event"
         android:textAlignment="center"
         android:textSize="50dp"
         android:id="@+id/eventSetting"/>

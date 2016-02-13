@@ -1,9 +1,9 @@
 package com.teamtbd.teamtbdapp.events;
 
-public class PriceEvent {
+public class UpdateTotalEvent {
     public String content;
 
-    public PriceEvent(String content) {
+    public UpdateTotalEvent(String content) {
         this.content = content;
     }
 }
