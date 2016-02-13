@@ -14,6 +14,7 @@ import com.facebook.Profile;
 import com.teamtbd.teamtbdapp.events.Bus;
 import com.teamtbd.teamtbdapp.events.EventCreationEvent;
 import com.teamtbd.teamtbdapp.events.TestEvent;
+import com.teamtbd.teamtbdapp.events.UpdateTotalEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -53,7 +54,6 @@ public class EventService implements IEventService {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/" + eventID + "/tickets/" + userID + "/" + qty +"/", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                eventBus.post(new TestEvent(response));
                 Log.i("_TEAM_TBD_", "getTickets posted.");
             }
         }, new Response.ErrorListener() {
@@ -65,4 +65,23 @@ public class EventService implements IEventService {
 
         queue.add(stringRequest);
     }
+
+    public void getTicketPrice(String eventID) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL + "events/" + eventID + "/price/", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("_TEAM_TBD_", "getTicketPrice posted.");
+                eventBus.post(new UpdateTotalEvent(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("_TEAM_TBD_", error.networkResponse.data.toString());
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
 }
