@@ -16,11 +16,24 @@ function getGUID() {
         s4() + '-' + s4() + s4() + s4();
 }
 
+exports.getAllEvents = function(req, res){
+    Event.find({}, function(err, events) {
+        var eventMap = {};
+
+        events.forEach(function(event) {
+            userMap[event._id] = event;
+        });
+
+        res.send(eventMap);
+    });
+};
+
 exports.createEvent = function (req, res) {
     var newEvent = new Event();
     newEvent.id = getGUID();
     newEvent.hostID = req.params.hostID;
     newEvent.name = req.params.name;
+    newEvent.price = req.params.price;
     newEvent.save();
     res.json(newEvent.id);
 };
@@ -43,7 +56,7 @@ exports.addTicketsToUser = function (req, res) {
     Event.findOne({'id': req.params.id}, function (err, id) {
         if (!id) {
             res.json('Try to fool me, this event does not exist.');
-        } else {
+        } else if(!id.contestStarted && !id.canBuyTickets){
             if (id.uniqueUsers.indexOf(req.params.userID) == -1) {
                 exports.subscribeUser(req, res);
             }
@@ -51,8 +64,8 @@ exports.addTicketsToUser = function (req, res) {
                 id.tickets.push(req.params.userID);
             }
             id.save();
-            res.end();
         }
+        res.end();
     });
 };
 
@@ -66,7 +79,7 @@ exports.getUsers = function (req, res) {
     });
 };
 
-exports.getWinner = function (req, res) {
+exports.calculateWinner = function (req, res) {
     Event.findOne({'id': req.params.id}, function (err, id) {
         if (!id) {
             res.json('Try to fool me, this event does not exist.');
@@ -74,11 +87,69 @@ exports.getWinner = function (req, res) {
             var winnerIndex = getRandomInt(0, id.tickets.length - 1);
             var winnerID = id.tickets[winnerIndex];
             User.findOne({'id': winnerID}, function (err, user) {
-                res.json(user);
+                id.winnerID = user.id;
+                id.save();
+                res.end();
             });
         }
     });
 };
+
+exports.isWinner = function(req, res){
+    Event.findOne({'id': req.params.id}, function (err, id) {
+        if (!id) {
+            res.json(false);
+        } else {
+            res.json(req.params.userID == id.winnerID);
+        }
+    });
+};
+
+
+exports.isContestStarted = function(req, res){
+    Event.findOne({'id': req.params.id}, function (err, id) {
+        if (!id) {
+            res.json(false);
+        } else {
+            res.json(id.contestStarted);
+        }
+    });
+};
+
+exports.canBuyTickets = function(req, res){
+    Event.findOne({'id': req.params.id}, function (err, id) {
+        if (!id) {
+            res.json(false);
+        } else {
+            res.json(id.canBuyTickets);
+        }
+    });
+};
+
+exports.setContestStarted = function(req, res){
+    Event.findOne({'id': req.params.id}, function (err, id) {
+        if (!id) {
+            res.json(false);
+        } else {
+            id.contestStarted = req.params.contestStarted;
+            id.save();
+            res.end();
+        }
+    });
+};
+
+exports.setCanBuyTickets = function(req, res){
+    Event.findOne({'id': req.params.id}, function (err, id) {
+        if (!id) {
+            res.json(false);
+        } else {
+            id.canBuyTickets = req.params.canBuyTickets;
+            id.save();
+            res.end();
+        }
+    });
+};
+
 
 exports.getName = function (req, res) {
     Event.findOne({'id': req.params.id}, function (err, id) {
